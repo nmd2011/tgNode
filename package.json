@@ -1,0 +1,29 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "\"# tgNode\"",
+  "main": "vidlyapi.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmd2011/tgNode.git"
+  },
+  "keywords": [
+    "vidly",
+    "api",
+    "mosh",
+    "js"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmd2011/tgNode/issues"
+  },
+  "homepage": "https://github.com/nmd2011/tgNode#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^13.1.0"
+  }
+}
