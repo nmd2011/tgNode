@@ -9,13 +9,13 @@ let genres = [
     {id: 2, genre: 'comedy', year: 2010}
 ];
 
-// function validateBody(body) {
-//     const schema = {
-//         id: Joi.string().min(3).required(),
-//         year: Joi.number().min(4).max(4).required()
-//     };
-//     const result = Joi.validate(body, schema);
-// }
+ function validateBody(body) {
+     const schema = Joi.object({
+         genre: Joi.string().min(3).required(),
+         year: Joi.number().min(1950).max(2000).required()
+     });
+      return schema.validate(body) 
+ }
 
 
 
@@ -32,16 +32,13 @@ api.get('/api/genres/:id', (req,res) => {
 })
 
 api.post('/api/genres', (req,res) => {
-    const schema ={
-        genre: Joi.string().min(3).required(),
-        year: Joi.number().min(4).max(4)
-        };
-    const result = Joi.validate(req.body, schema);
-   // console.log(result);
-    if(result.error) {
-        res.status(404).send(result.error.details[0].message);
-        return;
-    }
+    let {error} = validateBody(req.body) 
+    if(error) {
+        res.status(404).send(error.details[0].message);
+        return; 
+
+    } 
+        
     
     const genre = {
         id : genres.length + 1,
@@ -54,5 +51,5 @@ api.post('/api/genres', (req,res) => {
 })
 
 
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 6000;
 api.listen (port, () => console.log(`Listening on ${port}`));
