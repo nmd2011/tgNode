@@ -36,10 +36,7 @@ api.post('/api/genres', (req,res) => {
     if(error) {
         res.status(404).send(error.details[0].message);
         return; 
-
     } 
-        
-    
     const genre = {
         id : genres.length + 1,
         genre : req.body.genre,
@@ -50,6 +47,31 @@ api.post('/api/genres', (req,res) => {
     
 })
 
+
+api.put('/api/genres/:id', (req, res) => {
+        let genre = genres.find( g => g.id === parseInt(req.params.id));
+    if(!genre) res.status(404).send("Bla blah blah");
+
+    let {error} = validateBody(req.body) 
+    if(error) {
+        res.status(404).send(error.details[0].message);
+        return; 
+    } 
+
+    genre.genre = req.body.genre;
+
+    res.send(genre);
+    
+})
+
+api.delete('/api/genres/:id', (req,res) => {
+    const genre = genres.find(g => g.id === parseInt(req.params.id));
+    if(!genre) res.status(404).send("This record does not exist");
+    
+    let index = genres.indexOf(genre);
+    genres.splice(index,1);
+    res.send(genre);
+})
 
 const port = process.env.PORT || 6000;
 api.listen (port, () => console.log(`Listening on ${port}`));
